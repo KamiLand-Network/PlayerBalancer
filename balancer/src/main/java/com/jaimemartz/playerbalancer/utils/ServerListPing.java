@@ -5,10 +5,7 @@ import com.google.gson.GsonBuilder;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentStyle;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.chat.ComponentSerializer;
-import net.md_5.bungee.chat.ComponentStyleSerializer;
-import net.md_5.bungee.chat.TextComponentSerializer;
-import net.md_5.bungee.chat.TranslatableComponentSerializer;
+import net.md_5.bungee.chat.*;
 
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
@@ -23,8 +20,8 @@ public final class ServerListPing {
 
     private static Gson gson = new GsonBuilder()
             .registerTypeAdapter(BaseComponent.class, new ComponentSerializer())
-            .registerTypeAdapter(TextComponent.class, new TextComponentSerializer())
-            .registerTypeAdapter(TranslatableComponentSerializer.class, new TranslatableComponentSerializer())
+            .registerTypeAdapter(TextComponent.class, new TextComponentSerializer(VersionedComponentSerializer.forVersion(ChatVersion.V1_16)))
+            .registerTypeAdapter(TranslatableComponentSerializer.class, new TranslatableComponentSerializer(VersionedComponentSerializer.forVersion(ChatVersion.V1_16)))
             .registerTypeAdapter(ComponentStyle.class, new ComponentStyleSerializer() )
             .create();
 
